@@ -128,7 +128,7 @@ with col1:
 
             importance = pd.concat([importance, columns], axis=1)
             importance.columns = ['importance', 'index']
-            importance_fig = round(importance.set_index('index')*100.00, 5)
+            importance_fig = importance.set_index('index')
             importance_fig.sort_values(by='importance', ascending=True, inplace=True)
 
             # plotting the figure
