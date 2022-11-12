@@ -124,12 +124,11 @@ with col1:
         with st.expander('Click to see how much each feature weight'):
             importance = model.feature_importances_
             indices = np.argsort(importance)
-            
-            columns = Index(['Credit_Score', 'Credit_Mix', 'Outstanding_Debt', 'Interest_Rate','Num_Credit_Inquiries', 'Changed_Credit_Limit'], dtype='object')
+            features = pd.DataFrame(['Credit_Score', 'Credit_Mix', 'Outstanding_Debt', 'Interest_Rate','Num_Credit_Inquiries', 'Changed_Credit_Limit']).set_index(0).index
             
             plt.title('Feature Importances')
             plt.barh(range(len(indices)), importance[indices], color='g', align='center')
-            plt.yticks(range(len(indices)), [columns[i] for i in indices])
+            plt.yticks(range(len(indices)), [features[i] for i in indices])
             plt.xlabel('Relative Importance')
             plt.xlim(0,20)
             sns.despine(right=True, top=True)
