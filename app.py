@@ -37,7 +37,7 @@ with st.sidebar:
     Credit_Mix = st.number_input('Predominant Credit:', min_value=1, max_value=3, value=Credit_Mix_default)
     Outstanding_Debt = st.number_input('Remaining debt to be paid:', min_value=0.23, max_value=4998.07, step=0.01, value=Outstanding_Debt_default)
     Interest_Rate = st.number_input('Interest rate on credit card', min_value=1, max_value=34, step=1, value=Interest_Rate_default)
-    Num_Credit_Inquiries = st.number_input('Number of Credit Inquiries', min_value=0.0, max_value=20, step=1, value=Num_Credit_Inquiries_default)
+    Num_Credit_Inquiries = st.number_input('Number of Credit Inquiries', min_value=0, max_value=20, step=1, value=Num_Credit_Inquiries_default)
     Changed_Credit_Limit = st.number_input('Percentage change in credit card limit', min_value=-6.48, max_value=36.29, step=0.01, value=Changed_Credit_Limit_default)
     run = st.button( 'Run the numbers!')
 
