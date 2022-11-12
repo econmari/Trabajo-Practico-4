@@ -123,25 +123,19 @@ with col1:
 
         with st.expander('Click to see how much each feature weight'):
             importance = model.feature_importances_
+            indices = np.argsort(importance)
             importance = pd.DataFrame(importance)
             columns = pd.DataFrame(["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
-
             importance = pd.concat([importance, columns], axis=1)
-            importance.columns = ['importance', 'index']
-            importance_fig = round(importance.set_index('index')*100.00, 2)
-            importance_fig.sort_values(by='importance', ascending=True, inplace=True)
-
-            # plotting the figure
-            importance_figure, ax = plt.subplots()
-            bars = ax.barh('index', 'importance', data=importance_fig)
-            ax.bar_label(bars)
-            plt.ylabel('')
-            plt.xlabel('')
+            
+            plt.title('Feature Importances')
+            plt.barh(range(len(indices)), importance[indices], color='g', align='center')
+            plt.yticks(range(len(indices)), [columns[i] for i in indices])
+            plt.xlabel('Relative Importance')
             plt.xlim(0,20)
             sns.despine(right=True, top=True)
             st.pyplot(importance_figure)
-    
-
+            plt.show()
 
 # In[ ]:
 
