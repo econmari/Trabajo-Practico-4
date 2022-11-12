@@ -123,8 +123,8 @@ with col1:
 
         with st.expander('Click to see how much each feature weight'):
             importance = model.feature_importances_
-            indices = np.argsort(importance)
             importance = pd.DataFrame(importance)
+            indices = np.argsort(importance)
             columns = pd.DataFrame(["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
             importance = pd.concat([importance, columns], axis=1)
             
