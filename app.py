@@ -124,7 +124,8 @@ with col1:
         with st.expander('Click to see how much each feature weight'):
             importance = model.feature_importances_
             indices = np.argsort(importance)
-            columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"]
+            
+            columns = Index(['Credit_Score', 'Credit_Mix', 'Outstanding_Debt', 'Interest_Rate','Num_Credit_Inquiries', 'Changed_Credit_Limit'], dtype='object')
             
             plt.title('Feature Importances')
             plt.barh(range(len(indices)), importance[indices], color='g', align='center')
