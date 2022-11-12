@@ -118,7 +118,7 @@ with col1:
         prob_fig, ax = plt.subplots()
 
         with st.expander('Click to see how certain the algorithm was'):
-            plt.pie(model.predict_proba(output)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
+            plt.pie(model.predict_proba(X)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
             st.pyplot(prob_fig)
 
         with st.expander('Click to see how much each feature weight'):
