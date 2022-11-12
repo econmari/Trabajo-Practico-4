@@ -137,7 +137,7 @@ with col1:
             ax.bar_label(bars)
             plt.ylabel('')
             plt.xlabel('')
-            plt.xlim(0,20)
+            plt.xlim(0,0.4)
             sns.despine(right=True, top=True)
             st.pyplot(importance_figure)
 # In[ ]:
