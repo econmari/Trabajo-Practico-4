@@ -90,56 +90,56 @@ with col1:
 
     if run:
         
-    # Unpickle classifier
-    model = joblib.load("model.pkl")
-    
-    # Store inputs into dataframe
-    X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Num_Credit_Inquiries, Changed_Credit_Limit]], 
-                     columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
-    
-    # Get prediction
-    credit_score = model.predict(X)[0]
+        # Unpickle classifier
+        model = joblib.load("model.pkl")
 
-    if credit_score == 1:
-        st.balloons()
-        t1 = plt.Polygon([[5, 0.5], [5.5, 0], [4.5, 0]], color='black')
-        placeholder.markdown('Your credit score is **GOOD**! Congratulations!')
-        st.markdown('This credit score indicates that this person is likely to repay a loan, so the risk of giving them credit is low.')
-    elif credit_score == 2:
-        t1 = plt.Polygon([[3, 0.5], [3.5, 0], [2.5, 0]], color='black')
-        placeholder.markdown('Your credit score is **STANDARD**.')
-        st.markdown('This credit score indicates that this person is likely to repay a loan, but can occasionally miss some payments. Meaning that the risk of giving them credit is medium.')
-    elif credit_score == 3:
-        t1 = plt.Polygon([[1, 0.5], [1.5, 0], [0.5, 0]], color='black')
-        placeholder.markdown('Your credit score is **POOR**.')
-        st.markdown('This credit score indicates that this person is unlikely to repay a loan, so the risk of lending them credit is high.')
-    plt.gca().add_patch(t1)
-    figure.pyplot(f)
-    prob_fig, ax = plt.subplots()
-    
-    with st.expander('Click to see how certain the algorithm was'):
-        plt.pie(model.predict_proba(output)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
-        st.pyplot(prob_fig)
+        # Store inputs into dataframe
+        X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Num_Credit_Inquiries, Changed_Credit_Limit]], 
+                         columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
 
-    with st.expander('Click to see how much each feature weight'):
-        importance = model.feature_importances_
-        importance = pd.DataFrame(importance)
-        columns = pd.DataFrame(["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
+        # Get prediction
+        credit_score = model.predict(X)[0]
 
-        importance = pd.concat([importance, columns], axis=1)
-        importance.columns = ['importance', 'index']
-        importance_fig = round(importance.set_index('index')*100.00, 2)
-        importance_fig.sort_values(by='importance', ascending=True, inplace=True)
+        if credit_score == 1:
+            st.balloons()
+            t1 = plt.Polygon([[5, 0.5], [5.5, 0], [4.5, 0]], color='black')
+            placeholder.markdown('Your credit score is **GOOD**! Congratulations!')
+            st.markdown('This credit score indicates that this person is likely to repay a loan, so the risk of giving them credit is low.')
+        elif credit_score == 2:
+            t1 = plt.Polygon([[3, 0.5], [3.5, 0], [2.5, 0]], color='black')
+            placeholder.markdown('Your credit score is **STANDARD**.')
+            st.markdown('This credit score indicates that this person is likely to repay a loan, but can occasionally miss some payments. Meaning that the risk of giving them credit is medium.')
+        elif credit_score == 3:
+            t1 = plt.Polygon([[1, 0.5], [1.5, 0], [0.5, 0]], color='black')
+            placeholder.markdown('Your credit score is **POOR**.')
+            st.markdown('This credit score indicates that this person is unlikely to repay a loan, so the risk of lending them credit is high.')
+        plt.gca().add_patch(t1)
+        figure.pyplot(f)
+        prob_fig, ax = plt.subplots()
 
-        # plotting the figure
-        importance_figure, ax = plt.subplots()
-        bars = ax.barh('index', 'importance', data=importance_fig)
-        ax.bar_label(bars)
-        plt.ylabel('')
-        plt.xlabel('')
-        plt.xlim(0,20)
-        sns.despine(right=True, top=True)
-        st.pyplot(importance_figure)
+        with st.expander('Click to see how certain the algorithm was'):
+            plt.pie(model.predict_proba(output)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
+            st.pyplot(prob_fig)
+
+        with st.expander('Click to see how much each feature weight'):
+            importance = model.feature_importances_
+            importance = pd.DataFrame(importance)
+            columns = pd.DataFrame(["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
+
+            importance = pd.concat([importance, columns], axis=1)
+            importance.columns = ['importance', 'index']
+            importance_fig = round(importance.set_index('index')*100.00, 2)
+            importance_fig.sort_values(by='importance', ascending=True, inplace=True)
+
+            # plotting the figure
+            importance_figure, ax = plt.subplots()
+            bars = ax.barh('index', 'importance', data=importance_fig)
+            ax.bar_label(bars)
+            plt.ylabel('')
+            plt.xlabel('')
+            plt.xlim(0,20)
+            sns.despine(right=True, top=True)
+            st.pyplot(importance_figure)
     
 
 
