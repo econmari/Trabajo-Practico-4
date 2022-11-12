@@ -1,0 +1,14 @@
+notebook==6.4.12
+cloudpickle==2.2.0
+joblib==1.2.0
+numpy==1.23.3
+pandas==1.5.0
+pickleshare==0.7.5
+scikit-learn==1.1.2
+scipy==1.9.1
+shap==0.41.0
+streamlit==1.13.0
+xgboost==1.7.1
+matplotlib==3.5.2
+matplotlib-inline==0.1.2
+seaborn==0.11.2
