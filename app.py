@@ -100,7 +100,7 @@ with col1:
         # Get prediction
         credit_score = model.predict(X)[0]
 
-        if credit_score == 0:
+        if credit_score == 2:
             st.balloons()
             t1 = plt.Polygon([[5, 0.5], [5.5, 0], [4.5, 0]], color='black')
             placeholder.markdown('Your credit score is **GOOD**! Congratulations!')
@@ -109,7 +109,7 @@ with col1:
             t1 = plt.Polygon([[3, 0.5], [3.5, 0], [2.5, 0]], color='black')
             placeholder.markdown('Your credit score is **STANDARD**.')
             st.markdown('This credit score indicates that this person is likely to repay a loan, but can occasionally miss some payments. Meaning that the risk of giving them credit is medium.')
-        elif credit_score == 2:
+        elif credit_score == 0:
             t1 = plt.Polygon([[1, 0.5], [1.5, 0], [0.5, 0]], color='black')
             placeholder.markdown('Your credit score is **POOR**.')
             st.markdown('This credit score indicates that this person is unlikely to repay a loan, so the risk of lending them credit is high.')
