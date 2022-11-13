@@ -105,7 +105,7 @@ with col1:
         #X = X.replace(["Negative", "Neutral", "Positive"], [1, 2, 3])
                           
         # Get prediction
-       credit_score = model.predict(X)[0]
+         credit_score = model.predict(X)[0]
 
         if credit_score == 0:
             st.balloons()
