@@ -25,7 +25,7 @@ st.caption('Made by: Marisol Añon, Micaela Vittor, Gonzalo Cardozo, Flor Horno,
 
 with st.sidebar:
     st.header('Credit Score Form')
-    Credit_Mix = st.selectbox('Credit Mix:', ("Negative", "Neutral", "Positive"))
+    Credit_Mix = st.selectbox('Credit Mix:', start= 1,end=3, step=1))
     Outstanding_Debt = st.number_input('Remaining debt to be paid')
     Interest_Rate = st.number_input('Interest rate on credit card')
     Changed_Credit_Limit = st.number_input('Percentage change in credit card limit')
@@ -90,15 +90,15 @@ with col1:
 
         # Store inputs into dataframe
 
-        if Credit_Mix == 'Negative':
-            Negative = 1
-        elif Credit_Mix == 'Neutral':
-            Neutral = 2
-        else:
-            Positive = 3
+        #if Credit_Mix == 'Negative':
+        #    Negative = 1
+        #elif Credit_Mix == 'Neutral':
+        #    Neutral = 2
+        #else:
+        #    Positive = 3
             
         scaler = StandardScaler()
-        X = scaler.fit_transform([[Negative, Neutral, Positive, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]])
+        X =  pd.DataFrame(scaler.fit_transform([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "Total_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
         
         #X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], 
         #                 columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "Total_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
