@@ -90,10 +90,19 @@ with col1:
 
         # Store inputs into dataframe
 
+        if Credit_Mix == 'Negative':
+            Negative = 1
+        elif Credit_Mix == 'Neutral':
+            Neutral = 2
+        else:
+            Positive = 3
+            
         scaler = StandardScaler()
-        X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], 
+        credit_score = scaler.transform([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]])
+        
+        #X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], 
                          columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "Total_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
-        X = X.replace(["Negative", "Neutral", "Positive"], [1, 2, 3])
+        #X = X.replace(["Negative", "Neutral", "Positive"], [1, 2, 3])
 
 
         # Get prediction
