@@ -10,16 +10,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import joblib
-
-
-# In[ ]:
-
-
-Changed_Credit_Limit_default = -6.48
-Num_Credit_Inquiries_default = 0
-Interest_Rate_default = 1
-Outstanding_Debt_default = 0.23
-Credit_Mix_default = 1
+from sklearn.preprocessing import StandardScaler
 
 
 # In[ ]:
@@ -34,13 +25,17 @@ st.caption('Made by: Marisol Añon, Micaela Vittor, Gonzalo Cardozo, Flor Horno,
 
 with st.sidebar:
     st.header('Credit Score Form')
-    Credit_Mix = st.number_input('Predominant Credit:', min_value=1, max_value=3, value=Credit_Mix_default)
-    Outstanding_Debt = st.number_input('Remaining debt to be paid:', min_value=0.23, max_value=4998.07, step=0.01, value=Outstanding_Debt_default)
-    Interest_Rate = st.number_input('Interest rate on credit card', min_value=1, max_value=34, step=1, value=Interest_Rate_default)
-    Num_Credit_Inquiries = st.number_input('Number of Credit Inquiries', min_value=0, max_value=20, step=1, value=Num_Credit_Inquiries_default)
-    Changed_Credit_Limit = st.number_input('Percentage change in credit card limit', min_value=-6.48, max_value=36.29, step=0.01, value=Changed_Credit_Limit_default)
+    Credit_Mix = st.selectbox('Credit Mix:', "Negative", "Neutral", "PNositive")
+    Outstanding_Debt = st.number_input('Remaining debt to be paid')
+    Interest_Rate = st.number_input('Interest rate on credit card')
+    Changed_Credit_Limit = st.number_input('Percentage change in credit card limit')
+    Total_Months_Credit_History_Age=  st.number_input('Total months of credit history')
+    Num_Credit_Card = st.number_input('Number of other credit cards held by the customer')
+    Delay_from_due_date = st.number_input("Average number of days delayed from the payment date")
+    Num_of_Loan= st.number_input("Number of loans taken from the bank")
+    Num_Bank_Accounts st.number_input("Number of bank accounts held by the customer")
+    Monthly_Balance = st.number_input("Monthly balance amount of the customer")
     run = st.button( 'Run the numbers!')
-
 
 # In[ ]:
 
@@ -94,8 +89,13 @@ with col1:
         model = joblib.load("model.pkl")
 
         # Store inputs into dataframe
+        scaler = StandardScaler()
+
         X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Num_Credit_Inquiries, Changed_Credit_Limit]], 
-                         columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Num_Credit_Inquiries","Changed_Credit_Limit"])
+                         columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "otal_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
+        X = X.replace(["Negative", "Neutral", "Positive"], [1, 2, 3])
+        
+        X = pd.DataFrame(scaler.fit_transform(X),columns = X.columns)
 
         # Get prediction
         credit_score = model.predict(X)[0]
@@ -120,6 +120,7 @@ with col1:
         with st.expander('Click to see how certain the algorithm was'):
             plt.pie(model.predict_proba(X)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
             st.pyplot(prob_fig)
+        
 
 
 
