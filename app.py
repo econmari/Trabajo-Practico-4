@@ -33,7 +33,7 @@ with st.sidebar:
     Num_Credit_Card = st.number_input('Number of other credit cards held by the customer')
     Delay_from_due_date = st.number_input("Average number of days delayed from the payment date")
     Num_of_Loan= st.number_input("Number of loans taken from the bank")
-    Num_Bank_Accounts st.number_input("Number of bank accounts held by the customer")
+    Num_Bank_Accounts= st.number_input("Number of bank accounts held by the customer")
     Monthly_Balance = st.number_input("Monthly balance amount of the customer")
     run = st.button( 'Run the numbers!')
 
