@@ -87,16 +87,9 @@ with col1:
         
         # Unpickle classifier
         model = joblib.load("model.pkl")
-
+        
         # Store inputs into dataframe
-
-        #if Credit_Mix == 'Negative':
-        #    Negative = 1
-        #elif Credit_Mix == 'Neutral':
-        #    Neutral = 2
-        #else:
-        #    Positive = 3
-            
+        
         scaler = StandardScaler()
         X =  pd.DataFrame(scaler.fit_transform([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "Total_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
         
@@ -105,8 +98,8 @@ with col1:
         #X = X.replace(["Negative", "Neutral", "Positive"], [1, 2, 3])
                           
         # Get prediction
-         credit_score = model.predict(X)[0]
-
+        credit_score = model.predict(X)[0]
+        
         if credit_score == 0:
             st.balloons()
             t1 = plt.Polygon([[5, 0.5], [5.5, 0], [4.5, 0]], color='black')
@@ -123,7 +116,7 @@ with col1:
         plt.gca().add_patch(t1)
         figure.pyplot(f)
         prob_fig, ax = plt.subplots()
-
+        
         with st.expander('Click to see how certain the algorithm was'):
             plt.pie(model.predict_proba(X)[0], labels=['Good', 'Poor', 'Standard'], autopct='%.0f%%')
             st.pyplot(prob_fig)
