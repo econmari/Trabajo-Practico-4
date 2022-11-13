@@ -121,26 +121,6 @@ with col1:
             plt.pie(model.predict_proba(X)[0], labels=['Poor', 'Standard', 'Good'], autopct='%.0f%%')
             st.pyplot(prob_fig)
 
-        with st.expander('Click to see how much each feature weight'):
-            importance = model.feature_importances_
-            importance = pd.DataFrame(importance)
-            columns = pd.DataFrame(['Credit_Score', 'Credit_Mix', 'Outstanding_Debt', 'Interest_Rate','Num_Credit_Inquiries', 'Changed_Credit_Limit'])
-
-            importance = pd.concat([importance, columns], axis=1)
-            importance.columns = ['importance', 'index']
-            importance_fig = importance.set_index('index')
-            importance_fig.sort_values(by='importance', ascending=True, inplace=True)
-
-            # plotting the figure
-            importance_figure, ax = plt.subplots()
-            bars = ax.barh('index', 'importance', data=importance_fig)
-            ax.bar_label(bars)
-            plt.ylabel('')
-            plt.xlabel('')
-            st.pyplot(importance_figure)
-            plt.xlabel('Relative Importance')
-# In[ ]:
-
 
 
 
