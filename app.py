@@ -98,7 +98,7 @@ with col1:
             Positive = 3
             
         scaler = StandardScaler()
-        credit_score = scaler.transform([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]])
+        X = scaler.transform([[Negative, Neutral, Positive, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]])
         
         #X = pd.DataFrame([[Credit_Mix, Outstanding_Debt, Interest_Rate, Changed_Credit_Limit, Total_Months_Credit_History_Age, Num_Credit_Card, Delay_from_due_date, Num_of_Loan, Num_Bank_Accounts, Monthly_Balance]], 
         #                 columns = ["Credit_Mix", "Outstanding_Debt", "Interest_Rate", "Changed_Credit_Limit", "Total_Months_Credit_History_Age", "Num_Credit_Card", "Delay_from_due_date", "Num_of_Loan", "Num_Bank_Accounts", "Monthly_Balance"])
