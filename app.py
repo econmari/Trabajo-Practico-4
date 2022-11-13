@@ -25,7 +25,7 @@ st.caption('Made by: Marisol Añon, Micaela Vittor, Gonzalo Cardozo, Flor Horno,
 
 with st.sidebar:
     st.header('Credit Score Form')
-    Credit_Mix = st.selectbox('Credit Mix:', start= 1,end=3, step=1))
+    Credit_Mix = st.selectbox('Credit Mix:', start= 1,end=3, step=1)
     Outstanding_Debt = st.number_input('Remaining debt to be paid')
     Interest_Rate = st.number_input('Interest rate on credit card')
     Changed_Credit_Limit = st.number_input('Percentage change in credit card limit')
